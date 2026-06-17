@@ -1,7 +1,11 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Between, Repository } from 'typeorm';
 import { HolidayEntity } from '../../models/entity/holiday.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
+import { FindNextHolidayReturnDto } from '../../models/dtos/find-next-holiday/find-next-holiday.return.dto';
 
 @Injectable()
 export class HolidayRepository {
@@ -14,13 +18,21 @@ export class HolidayRepository {
     return await this.holidaysTypeOrmRepository.save(newHoliday);
   }
 
-  async findNextHoliday(): Promise<HolidayEntity | null> {
-    const data = await this.holidaysTypeOrmRepository
-      .createQueryBuilder('t')
-      .where('t.sua_data >= :agora', { agora: new Date() })
-      .orderBy('t.sua_data', 'ASC')
-      .limit(1)
-      .getOne();
+  async findNextHoliday(): Promise<FindNextHolidayReturnDto | null> {
+    const data = await this.holidaysTypeOrmRepository.query(
+      /* sql */ `
+      SELECT 
+        *,
+        date - CURRENT_DATE AS "timeUntil"
+      FROM
+        contador.holiday
+      WHERE
+        contador.holiday."date" >= CURRENT_DATE
+      ORDER BY
+        contador.holiday."date"
+      LIMIT 1
+      `, [],
+    );
 
     if (data) {
       return data;
