@@ -11,6 +11,11 @@ async function bootstrap() {
   logger.log(
     `Swagger rodando em: http://localhost:${process.env.SERVER_PORT}/cnt-api`,
   );
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
+
   await app.listen(process.env.SERVER_PORT ?? 3000);
 }
 void bootstrap();

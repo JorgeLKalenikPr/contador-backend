@@ -17,12 +17,16 @@ export class UserEventsEntity {
   @Column({ name: 'name', type: 'character varying' })
   name: string;
 
+  @Column({ name: 'description', type: 'character varying' })
+  description: string;
+
   @Column({ name: 'date', type: 'timestamptz' })
   date: Date;
 
+  @Column({ name: 'user_id' })
+  userId: number;
+
   @ManyToOne(() => UsersEntity, (user) => user.userEvents)
-  @JoinColumn({
-    name: 'user_id',
-  })
-  userId: UsersEntity;
+  @JoinColumn({ name: 'user_id' })
+  user: UsersEntity;
 }

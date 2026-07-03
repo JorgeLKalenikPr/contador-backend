@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
 import { UsersEntity } from '../../models/entity/user.entity';
 import { Repository } from 'typeorm';
 
@@ -7,10 +7,16 @@ import { Repository } from 'typeorm';
 export class UserRepository {
   constructor(
     @InjectRepository(UsersEntity)
-    private readonly UsersTypeOrmRepository: Repository<UsersEntity>,
+    private readonly usersTypeOrmRepository: Repository<UsersEntity>,
   ) {}
 
-  async create(newUser: UsersEntity): Promise<UsersEntity> {
-    return await this.UsersTypeOrmRepository.save(newUser);
+  async create(newEntity: UsersEntity) {
+    return await this.usersTypeOrmRepository.save(newEntity);
+  }
+
+  async findByEmail(email: string): Promise<UsersEntity | null> {
+    return await this.usersTypeOrmRepository.findOne({
+      where: { email },
+    });
   }
 }

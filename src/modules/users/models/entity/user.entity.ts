@@ -11,7 +11,7 @@ export class UsersEntity {
   email: string;
 
   @Column({ name: 'email_confirmed', type: 'boolean', default: 'false' })
-  email_confirmed: boolean;
+  emailConfirmed: boolean;
 
   @OneToMany(() => UserEventsEntity, (userEvent) => userEvent.userId)
   userEvents: UserEventsEntity[];
