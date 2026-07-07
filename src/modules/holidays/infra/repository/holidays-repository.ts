@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -35,7 +36,7 @@ export class HolidayRepository {
     );
 
     if (data) {
-      return data;
+      return data[0];
     }
     return null;
   }

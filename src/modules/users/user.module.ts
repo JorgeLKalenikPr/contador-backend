@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersEntity } from './models/entity/user.entity';
@@ -10,15 +9,8 @@ import { LoginUserController } from './use-case/login/login.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsersEntity])],
-  providers: [
-    UserRepository,
-    RegisterUserUseCase,
-    LoginUserUseCase
-  ],
-  controllers: [
-    RegisterUserController,
-    LoginUserController
-  ],
+  providers: [UserRepository, RegisterUserUseCase, LoginUserUseCase],
+  controllers: [RegisterUserController, LoginUserController],
   exports: [],
 })
 export class UserModule {}

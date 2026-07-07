@@ -29,4 +29,8 @@ export class UserEventRepository {
   async delete(id: number): Promise<DeleteResult> {
     return await this.userEventsTypeOrmRepository.delete(id);
   }
+
+  async update(id: number, data: UserEventsEntity) {
+    return await this.userEventsTypeOrmRepository.update({ id: id }, data);
+  }
 }

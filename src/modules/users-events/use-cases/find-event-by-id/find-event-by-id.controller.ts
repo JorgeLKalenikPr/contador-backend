@@ -15,7 +15,6 @@ export class FindUserEventByIdController {
     summary: 'Busca evento pelo id',
   })
   async handle(@Param('id', ParseIntPipe) id: number) {
-    console.log('aqui entrou');
     return await this.findUserEventByIdUseCase.execute(id);
   }
 }

@@ -5,7 +5,7 @@ import { UserEventRepository } from '../../infra/typeorm/user-events.repository'
 
 @Injectable()
 export class CreateUseEventUseCase {
-  constructor(private readonly UserEventRepository: UserEventRepository) {}
+  constructor(private readonly userEventRepository: UserEventRepository) {}
 
   async execute(dto: CreateUserEventDto): Promise<UserEventsEntity> {
     const newEvent: UserEventsEntity = new UserEventsEntity();
@@ -15,6 +15,6 @@ export class CreateUseEventUseCase {
     newEvent.description = dto.description;
     newEvent.userId = dto.userId;
 
-    return await this.UserEventRepository.create(newEvent);
+    return await this.userEventRepository.create(newEvent);
   }
 }

@@ -9,12 +9,12 @@ export class FindAllUserEventsController {
     private readonly findAllUserEventsUseCase: FindAllUserEventsUseCase,
   ) {}
 
-  @Get('by-user/:userId')
+  @Get('by-user/:id')
   @ApiOperation({
     description: 'Rota para listagem de eventos com contagem de dias restantes',
     summary: 'Lista todos os eventos do usuário',
   })
-  async handle(@Param('userId', ParseIntPipe) userId: number) {
+  async handle(@Param('id', ParseIntPipe) userId: number) {
     return await this.findAllUserEventsUseCase.execute(userId);
   }
 }

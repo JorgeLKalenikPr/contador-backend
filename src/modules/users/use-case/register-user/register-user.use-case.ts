@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { UsersEntity } from '../../models/entity/user.entity';
 import { UserRepository } from '../../infra/repository/user.repository';
 import { RegisterUserDto } from '../../models/dtos/register-user/register-user.dto';
@@ -17,7 +17,7 @@ export class RegisterUserUseCase {
         message: 'Sucesso ao criar usuário',
       };
     } catch (error: any) {
-      console.log('deu ruim', error.message);
+      throw new InternalServerErrorException(error.message);
     }
   }
 }
